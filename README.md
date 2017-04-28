@@ -5,9 +5,9 @@ A really simple Python script to dump a Current Cost CC128 energy meter connecte
 Produces a never ending CSV file that looks like:
 
 ```
-1477815247,218
-1477815259,212
-1477815265,211
-1477815271,215
-1477815277,211
+2017-04-28T16:32:31Z,379
+2017-04-28T16:32:37Z,371
+2017-04-28T16:32:43Z,369
+2017-04-28T16:32:49Z,381
+2017-04-28T16:32:55Z,377
 ```
