@@ -1,10 +1,28 @@
 #!/usr/bin/env python
+
+import datetime
 import serial
 from xml.etree.cElementTree import fromstring
 import time
 import csv
 import signal
 import sys
+
+
+class UTC(datetime.tzinfo):
+    def utcoffset(self, dt):
+        return datetime.timedelta(0)
+
+    def tzname(self, dt):
+        return "UTC"
+
+    def dst(self, dt):
+        return datetime.timedelta(0)
+
+
+def utc_now_string():
+    return datetime.datetime.now(UTC()).strftime('%Y-%m-%dT%H:%M:%SZ')
+
 
 serial = serial.Serial('/dev/ttyUSB0', 57600)
 
@@ -33,8 +51,7 @@ with open('/srv/currentcost/currentcost.csv', 'a') as csvfile:
 
             watts = int(xml.find('ch1').find('watts').text)
 
-            now = time.time()
-            timestamp = int(now)
+            timestamp = utc_now_string()
 
             row = [timestamp, watts]
             writer.writerow(row)
